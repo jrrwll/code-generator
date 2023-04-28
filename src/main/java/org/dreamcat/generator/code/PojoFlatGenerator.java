@@ -24,8 +24,6 @@ import org.dreamcat.common.util.StringUtil;
 
 /**
  * Create by tuke on 2020/11/18
- * <p/>
- * flat a bean to map
  */
 @Setter
 @Builder
@@ -61,6 +59,7 @@ public class PojoFlatGenerator {
     private static final String put_value =
             "map.put(\"$name\", $value);\n";
 
+    // flat a bean to map
     public String generate(Class<?> pojoClass) {
         Map<String, String> context = new HashMap<>();
         context.put("class", pojoClass.getSimpleName());

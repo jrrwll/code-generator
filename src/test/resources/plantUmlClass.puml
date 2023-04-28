@@ -1,0 +1,29 @@
+@startuml
+' https://plantuml.com/zh/object-diagram
+' https://plantuml.com/zh/class-diagram
+
+entity Dummy {
++  id bigint
++  name varchar(30)
+}
+
+class Flight {
++  code char(32)
++  dummy_name varchar(50)
+}
+
+object London
+
+map CapitalCity {
+ UK => London
+ USA => Washington
+ Germany => Berlin
+}
+
+
+Flight --|> Dummy
+
+Dummy::name --> Flight::dummy_name : foo
+Dummy::id --> CapitalCity::USA : bar
+
+@enduml
