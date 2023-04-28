@@ -1,0 +1,44 @@
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+
+apply plugin: 'java-library'
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+version = VERSION
+group = GROUP_ID
+
+ext {
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    slf4jVersion = "1.7.36"
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    lombokVersion = "1.18.26"
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    junitVersion = "5.9.2"
+}
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    implementation 'org.dreamcat:common:0.4'
+}
+
+apply from: new File(rootDir, 'publish.gradle')
+
+task printVersion {
+    doLast {
+        print version
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
